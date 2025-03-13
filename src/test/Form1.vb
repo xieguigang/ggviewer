@@ -1,4 +1,5 @@
 ﻿Imports ggplot
+Imports ggviewer
 Imports Microsoft.VisualBasic.Data.Framework
 Imports Microsoft.VisualBasic.Drawing
 Imports Microsoft.VisualBasic.Imaging.Driver
@@ -8,7 +9,6 @@ Imports Microsoft.VisualBasic.Math.Distributions
 Imports Microsoft.VisualBasic.Math.LinearAlgebra
 Imports Microsoft.VisualBasic.Math.Statistics.Hypothesis.ANOVA
 Imports Microsoft.VisualBasic.Math.VBMath
-Imports PlotKit
 
 Public Class Form1
 
