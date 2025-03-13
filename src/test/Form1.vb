@@ -1,4 +1,5 @@
 ﻿Imports ggplot
+Imports ggplot.layers
 Imports ggviewer
 Imports Microsoft.VisualBasic.Data.Framework
 Imports Microsoft.VisualBasic.Drawing
@@ -44,7 +45,7 @@ Public Class Form1
         Dim left As Double() = randf.ExponentialRandomNumbers(1, 1000).Select(Function(a) -a).ToArray
         Dim raw = New DataFrame().add("value", left.JoinIterates(right).ToArray).add("series", "left".Repeats(1000).JoinIterates("right".Repeats(1000)).ToArray)
         Dim plot As ggplot.ggplot = ggplotFunction.ggplot(data:=raw, mapping:=aes(x:="value", fill:="series")) +
-            geom_histogram(position:="identity", alpha:=0.5, binwidth:=0.1) +
+            geom_histogram(position:=LayoutPosition.identity, alpha:=0.5, binwidth:=0.1) +
             labs(title:="Multiple Series Distribution", x:="Value", y:="Frequency")
 
         view.ScaleFactor = 1.25
