@@ -1,6 +1,6 @@
-# ``Plot#``
+# ``ggviewer``
 
-A interactive data visualization canvas for ggplot on clr environment.
+A interactive data visualization canvas for .NET CLR ggplot/R# based on winform framework.
 
 ![](./docs/Capture.PNG)
 
