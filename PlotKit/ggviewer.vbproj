@@ -9,6 +9,11 @@
     <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
     <Platforms>AnyCPU;x64</Platforms>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>ggplot viewer</Title>
+    <Authors>i@xieguigang.me</Authors>
+    <Description>A interactive data visualization canvas for .NET CLR ggplot/R# based on winform framework.</Description>
+    <PackageProjectUrl>https://github.com/xieguigang/ggviewer</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows|AnyCPU'">

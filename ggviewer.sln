@@ -17,7 +17,7 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "imaging.NET5", "..\GCModell
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "plots-netcore5", "..\GCModeller\src\runtime\sciBASIC#\Data_science\Visualization\Plots\plots-netcore5.vbproj", "{1B6BACB4-37A7-4D44-A741-7B92E4CEC176}"
 EndProject
-Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "PlotKit", "PlotKit\PlotKit.vbproj", "{C52EAA4D-53D4-46C9-B7A5-3124479B93F7}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "ggviewer", "PlotKit\ggviewer.vbproj", "{C52EAA4D-53D4-46C9-B7A5-3124479B93F7}"
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "test", "PlotKit\test\test.vbproj", "{93A92D40-4A80-434A-A1B5-610897E41A78}"
 EndProject
