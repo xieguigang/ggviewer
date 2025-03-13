@@ -4,11 +4,13 @@ Imports Microsoft.VisualBasic.Data.Framework
 Imports Microsoft.VisualBasic.Drawing
 Imports Microsoft.VisualBasic.Imaging.Driver
 Imports Microsoft.VisualBasic.Language.Vectorization
+Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Math
 Imports Microsoft.VisualBasic.Math.Distributions
 Imports Microsoft.VisualBasic.Math.LinearAlgebra
 Imports Microsoft.VisualBasic.Math.Statistics.Hypothesis.ANOVA
 Imports Microsoft.VisualBasic.Math.VBMath
+Imports randf = Microsoft.VisualBasic.Math.RandomExtensions
 
 Public Class Form1
 
@@ -26,14 +28,29 @@ Public Class Form1
         Controls.Add(view)
         view.Dock = DockStyle.Fill
 
+        Call histTest()
         ' Call gaussTest()
-        Call pcaTest()
+        ' Call pcaTest()
     End Sub
 
     Private Sub view_SizeChanged(sender As Object, e As EventArgs) Handles view.SizeChanged
         If view.Debug Then
             Me.Text = view.LastRenderCounter.ToString
         End If
+    End Sub
+
+    Private Sub histTest()
+        Dim right As Double() = randf.ExponentialRandomNumbers(1, 1000)
+        Dim left As Double() = randf.ExponentialRandomNumbers(1, 1000).Select(Function(a) -a).ToArray
+        Dim raw = New DataFrame().add("value", left.JoinIterates(right).ToArray).add("series", "left".Repeats(1000).JoinIterates("right".Repeats(1000)).ToArray)
+        Dim plot As ggplot.ggplot = ggplotFunction.ggplot(data:=raw, mapping:=aes(x:="value", fill:="series")) +
+            geom_histogram(position:="identity", alpha:=0.5, binwidth:=0.1) +
+            labs(title:="Multiple Series Distribution", x:="Value", y:="Frequency") +
+            theme_minimal()
+
+        view.ScaleFactor = 1.25
+        view.PlotPadding = plot.ggplotTheme.padding
+        view.ggplot = plot
     End Sub
 
     Private Sub pcaTest()
