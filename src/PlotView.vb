@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.VisualBasic.ApplicationServices
+Imports Microsoft.VisualBasic.ComponentModel.Ranges.Model
 Imports Microsoft.VisualBasic.Imaging
 Imports Microsoft.VisualBasic.Imaging.Drawing2D
 Imports Microsoft.VisualBasic.Imaging.Driver
@@ -10,6 +11,14 @@ Public Class PlotView
     Dim m_ggplot As ggplot.ggplot
     Dim m_counter As New PerformanceCounter
     Dim m_ps As PostScriptBuilder
+
+    Dim x As DoubleRange
+    Dim y As DoubleRange
+
+    Dim dataX As d3js.scale.LinearScale
+    Dim dataY As d3js.scale.LinearScale
+    Dim scaleX As d3js.scale.LinearScale
+    Dim scaleY As d3js.scale.LinearScale
 
     Public Property ggplot As ggplot.ggplot
         Get
@@ -57,6 +66,9 @@ Public Class PlotView
         Call ggplot.Plot(g, region)
         Call g.Flush()
 
+        x = ggplot.base.data!x
+        y = ggplot.base.data!y
+
         m_ps = g.GetContextInfo
     End Sub
 
@@ -73,6 +85,12 @@ Public Class PlotView
             Dim size As New Size(Width * ScaleFactor, Height * ScaleFactor)
             Dim render As PostScriptBuilder = m_ps.Resize(size)
 
+            dataX = d3js.scale.linear.domain(values:=New Double() {0, Width}).range(x)
+            dataY = d3js.scale.linear.domain(values:=New Double() {0, Height}).range(y)
+
+            scaleX = d3js.scale.linear.domain(values:=New Double() {0, Width}).range(values:=New Double() {0, size.Width})
+            scaleY = d3js.scale.linear.domain(values:=New Double() {0, Height}).range(values:=New Double() {0, size.Height})
+
             PictureBox1.BackgroundImage = DirectCast(render.MakePaint(Drivers.GDI), ImageData).GetGdiPlusRasterImageResource
         End If
 
@@ -87,5 +105,13 @@ Public Class PlotView
 
     Public Sub Save(filename As String, format As ImageFormats)
 
+    End Sub
+
+    Private Sub PictureBox1_MouseMove(sender As Object, e As MouseEventArgs) Handles PictureBox1.MouseMove
+        Dim offset = PointToClient(Cursor.Position)
+        Dim dataXy As New PointF(dataX(offset.X), dataY(offset.Y))
+        Dim objectXy As New PointF(scaleX(offset.X), scaleY(offset.Y))
+
+        Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}]")
     End Sub
 End Class
