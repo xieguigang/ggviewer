@@ -1,4 +1,5 @@
-﻿Imports Microsoft.VisualBasic.ApplicationServices
+﻿Imports ggplot.elements
+Imports Microsoft.VisualBasic.ApplicationServices
 Imports Microsoft.VisualBasic.ComponentModel.Ranges.Model
 Imports Microsoft.VisualBasic.Imaging
 Imports Microsoft.VisualBasic.Imaging.Drawing2D
@@ -66,8 +67,8 @@ Public Class PlotView
         Call ggplot.Plot(g, region)
         Call g.Flush()
 
-        x = ggplot.base.data!x
-        y = ggplot.base.data!y
+        Dim x As axisMap = ggplot.base.data!x
+        Dim y As axisMap = ggplot.base.data!y
 
         m_ps = g.GetContextInfo
     End Sub
