@@ -43,7 +43,8 @@ Public Class Form1
     Private Sub histTest()
         Dim right As Double() = randf.ExponentialRandomNumbers(1, 1000)
         Dim left As Double() = randf.ExponentialRandomNumbers(1, 1000).Select(Function(a) -a).ToArray
-        Dim raw = New DataFrame().add("value", left.JoinIterates(right).ToArray).add("series", "left".Repeats(1000).JoinIterates("right".Repeats(1000)).ToArray)
+        Dim right2 As Double() = randf.ExponentialRandomNumbers(2, 1000)
+        Dim raw = New DataFrame().add("value", Linq.Concatenate(left, right, right2)).add("series", {"left", "right", "right2"}.Repeats([each]:=1000))
         Dim plot As ggplot.ggplot = ggplotFunction.ggplot(data:=raw, mapping:=aes(x:="value", fill:="series")) +
             geom_histogram(position:=LayoutPosition.identity, alpha:=0.5, binwidth:=0.1) +
             labs(title:="Multiple Series Distribution", x:="Value", y:="Frequency")
