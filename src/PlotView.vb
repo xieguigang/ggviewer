@@ -41,6 +41,10 @@ Public Class PlotView
     Public Property Debug As Boolean = False
 #End If
 
+    Shared Sub New()
+        Call ImageDriver.RegisterPostScript()
+    End Sub
+
     Private Sub RenderPsElements()
         Dim size As New Size(Width * ScaleFactor, Height * ScaleFactor)
         Dim bg = ggplot.ggplotTheme.background.TranslateColor
