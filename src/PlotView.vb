@@ -12,6 +12,7 @@ Public Class PlotView
     Dim m_ggplot As ggplot.ggplot
     Dim m_counter As New PerformanceCounter
     Dim m_ps As PostScriptBuilder
+    Dim m_xy As SpatialLookup
 
     Dim x As DoubleRange
     Dim y As DoubleRange
@@ -82,6 +83,7 @@ Public Class PlotView
         End If
 
         m_ps = g.GetContextInfo
+        m_xy = New SpatialLookup(ps:=g.GetContextInfo)
     End Sub
 
     Private Sub Rendering()
@@ -123,7 +125,12 @@ Public Class PlotView
         Dim offset = PointToClient(Cursor.Position)
         Dim dataXy As New PointF(dataX(offset.X), dataY(offset.Y))
         Dim objectXy As New PointF(scaleX(offset.X), scaleY(offset.Y))
+        Dim obj As PSElement = m_xy.FindNearby(dataXy.X, dataXy.Y)
 
-        Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}]")
+        If obj Is Nothing Then
+            Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}]")
+        Else
+            Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}] {obj.ToString}")
+        End If
     End Sub
 End Class
