@@ -70,6 +70,17 @@ Public Class PlotView
         Dim x As axisMap = ggplot.base.data!x
         Dim y As axisMap = ggplot.base.data!y
 
+        If x.mapper = d3js.scale.MapperTypes.Continuous Then
+            Me.x = x.ToNumeric
+        Else
+            Throw New NotImplementedException
+        End If
+        If y.mapper = d3js.scale.MapperTypes.Continuous Then
+            Me.y = y.ToNumeric
+        Else
+            Throw New NotImplementedException
+        End If
+
         m_ps = g.GetContextInfo
     End Sub
 
