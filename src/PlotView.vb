@@ -107,6 +107,9 @@ Public Class PlotView
             scaleX = d3js.scale.linear.domain(values:=New Double() {0, Width}).range(values:=New Double() {0, size.Width})
             scaleY = d3js.scale.linear.domain(values:=New Double() {0, Height}).range(values:=New Double() {0, size.Height})
 
+            ' update index for plot element spatial rendering
+            m_xy = New SpatialLookup(ps:=render)
+
             PictureBox1.BackgroundImage = img.GetGdiPlusRasterImageResource
         End If
 
