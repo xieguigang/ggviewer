@@ -23,9 +23,14 @@ Partial Class PlotView
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PlotView))
         PictureBox1 = New PictureBox()
         ToolTip1 = New ToolTip(components)
+        ContextMenuStrip1 = New ContextMenuStrip(components)
+        CopyToolStripMenuItem = New ToolStripMenuItem()
+        SaveImageToolStripMenuItem = New ToolStripMenuItem()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        ContextMenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' PictureBox1
@@ -38,6 +43,26 @@ Partial Class PlotView
         PictureBox1.TabIndex = 0
         PictureBox1.TabStop = False
         ' 
+        ' ContextMenuStrip1
+        ' 
+        ContextMenuStrip1.Items.AddRange(New ToolStripItem() {CopyToolStripMenuItem, SaveImageToolStripMenuItem})
+        ContextMenuStrip1.Name = "ContextMenuStrip1"
+        ContextMenuStrip1.Size = New Size(135, 48)
+        ' 
+        ' CopyToolStripMenuItem
+        ' 
+        CopyToolStripMenuItem.Image = CType(resources.GetObject("CopyToolStripMenuItem.Image"), Image)
+        CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
+        CopyToolStripMenuItem.Size = New Size(134, 22)
+        CopyToolStripMenuItem.Text = "Copy"
+        ' 
+        ' SaveImageToolStripMenuItem
+        ' 
+        SaveImageToolStripMenuItem.Image = CType(resources.GetObject("SaveImageToolStripMenuItem.Image"), Image)
+        SaveImageToolStripMenuItem.Name = "SaveImageToolStripMenuItem"
+        SaveImageToolStripMenuItem.Size = New Size(134, 22)
+        SaveImageToolStripMenuItem.Text = "Save Image"
+        ' 
         ' PlotView
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -47,10 +72,14 @@ Partial Class PlotView
         Name = "PlotView"
         Size = New Size(404, 336)
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        ContextMenuStrip1.ResumeLayout(False)
         ResumeLayout(False)
     End Sub
 
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents CopyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SaveImageToolStripMenuItem As ToolStripMenuItem
 
 End Class

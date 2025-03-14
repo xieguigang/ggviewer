@@ -5,6 +5,7 @@ Imports Microsoft.VisualBasic.Imaging
 Imports Microsoft.VisualBasic.Imaging.Drawing2D
 Imports Microsoft.VisualBasic.Imaging.Driver
 Imports Microsoft.VisualBasic.Imaging.PostScript
+Imports Microsoft.VisualBasic.MIME.Html.CSS
 Imports PlotPadding = Microsoft.VisualBasic.MIME.Html.CSS.Padding
 
 Public Class PlotView
@@ -117,20 +118,50 @@ Public Class PlotView
         Call Rendering()
     End Sub
 
-    Public Sub Save(filename As String, format As ImageFormats)
+    Public Sub Save(filename As String)
+        Dim driver As Drivers = g.ParseDriverEnumValue(filename.ExtensionSuffix)
+        Dim plotPadding As PlotPadding = plotPadding.TryParse(ggplot.ggplotTheme.padding)
+        Dim size As New Size(m_ps.width, m_ps.height)
+        Dim bg = ggplot.ggplotTheme.background
+        Dim padding As Integer() = PaddingLayout.EvaluateFromCSS(New CSSEnvirnment(size), plotPadding)
 
+        Using gfx As IGraphics = DriverLoad.CreateGraphicsDevice(size, bg, driver:=driver)
+            Call m_ps.MakePaint(gfx)
+            Call DriverLoad.GetData(gfx, padding).Save(filename)
+        End Using
     End Sub
 
     Private Sub PictureBox1_MouseMove(sender As Object, e As MouseEventArgs) Handles PictureBox1.MouseMove
         Dim offset = PointToClient(Cursor.Position)
         Dim dataXy As New PointF(dataX(offset.X), dataY(offset.Y))
         Dim objectXy As New PointF(scaleX(offset.X), scaleY(offset.Y))
-        Dim obj As PSElement = m_xy.FindNearby(dataXy.X, dataXy.Y)
+        Dim obj As PSElement = m_xy.FindNearby(objectXy.X, objectXy.Y)
 
         If obj Is Nothing Then
             Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}]")
         Else
             Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}] {obj.ToString}")
         End If
+    End Sub
+
+    Private Sub CopyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyToolStripMenuItem.Click
+        Call Clipboard.SetImage(PictureBox1.BackgroundImage)
+    End Sub
+
+    Private Sub SaveImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveImageToolStripMenuItem.Click
+        Dim filter_str As String
+
+#If NET48 Then
+        filter_str = "Raster image(*.jpg;*.png;*.bmp;*.webp)|*.jpg;*.png;*.bmp;*.webp|SVG(*.svg)|*.svg"
+#Else
+        filter_str = "Raster image(*.jpg;*.png;*.bmp;*.webp)|*.jpg;*.png;*.bmp;*.webp|SVG(*.svg)|*.svg|PDF(*.pdf)|*.pdf"
+#End If
+#Disable Warning
+        Using file As New SaveFileDialog With {.Filter = filter_str}
+            If file.ShowDialog = DialogResult.OK Then
+                Call Save(file.FileName)
+            End If
+        End Using
+#Enable Warning
     End Sub
 End Class
