@@ -25,53 +25,44 @@ Partial Class PlotView
         components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PlotView))
         PictureBox1 = New PictureBox()
-        ToolTip1 = New ToolTip(components)
         ContextMenuStrip1 = New ContextMenuStrip(components)
         CopyToolStripMenuItem = New ToolStripMenuItem()
         SaveImageToolStripMenuItem = New ToolStripMenuItem()
+        ToolTip1 = New ToolTip(components)
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         ContextMenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' PictureBox1
         ' 
-        PictureBox1.BackgroundImageLayout = ImageLayout.Zoom
+        resources.ApplyResources(PictureBox1, "PictureBox1")
         PictureBox1.ContextMenuStrip = ContextMenuStrip1
-        PictureBox1.Dock = DockStyle.Fill
-        PictureBox1.Location = New Point(0, 0)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(404, 336)
-        PictureBox1.TabIndex = 0
         PictureBox1.TabStop = False
         ' 
         ' ContextMenuStrip1
         ' 
         ContextMenuStrip1.Items.AddRange(New ToolStripItem() {CopyToolStripMenuItem, SaveImageToolStripMenuItem})
         ContextMenuStrip1.Name = "ContextMenuStrip1"
-        ContextMenuStrip1.Size = New Size(135, 48)
+        resources.ApplyResources(ContextMenuStrip1, "ContextMenuStrip1")
         ' 
         ' CopyToolStripMenuItem
         ' 
-        CopyToolStripMenuItem.Image = CType(resources.GetObject("CopyToolStripMenuItem.Image"), Image)
+        resources.ApplyResources(CopyToolStripMenuItem, "CopyToolStripMenuItem")
         CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        CopyToolStripMenuItem.Size = New Size(134, 22)
-        CopyToolStripMenuItem.Text = "Copy"
         ' 
         ' SaveImageToolStripMenuItem
         ' 
-        SaveImageToolStripMenuItem.Image = CType(resources.GetObject("SaveImageToolStripMenuItem.Image"), Image)
+        resources.ApplyResources(SaveImageToolStripMenuItem, "SaveImageToolStripMenuItem")
         SaveImageToolStripMenuItem.Name = "SaveImageToolStripMenuItem"
-        SaveImageToolStripMenuItem.Size = New Size(134, 22)
-        SaveImageToolStripMenuItem.Text = "Save Image"
         ' 
         ' PlotView
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        resources.ApplyResources(Me, "$this")
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.SkyBlue
         Controls.Add(PictureBox1)
         Name = "PlotView"
-        Size = New Size(404, 336)
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ContextMenuStrip1.ResumeLayout(False)
         ResumeLayout(False)
