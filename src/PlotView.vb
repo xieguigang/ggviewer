@@ -98,7 +98,7 @@ Public Class PlotView
             Dim render As PostScriptBuilder = m_ps.Resize(size)
 
             dataX = d3js.scale.linear.domain(values:=New Double() {0, Width}).range(x)
-            dataY = d3js.scale.linear.domain(values:=New Double() {0, Height}).range(y)
+            dataY = d3js.scale.linear(reverse:=True).domain(values:=New Double() {0, Height}).range(y)
 
             scaleX = d3js.scale.linear.domain(values:=New Double() {0, Width}).range(values:=New Double() {0, size.Width})
             scaleY = d3js.scale.linear.domain(values:=New Double() {0, Height}).range(values:=New Double() {0, size.Height})
