@@ -36,6 +36,7 @@ Partial Class PlotView
         ' PictureBox1
         ' 
         PictureBox1.BackgroundImageLayout = ImageLayout.Zoom
+        PictureBox1.ContextMenuStrip = ContextMenuStrip1
         PictureBox1.Dock = DockStyle.Fill
         PictureBox1.Location = New Point(0, 0)
         PictureBox1.Name = "PictureBox1"
