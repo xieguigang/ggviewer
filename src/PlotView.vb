@@ -99,6 +99,7 @@ Public Class PlotView
         If Not m_ps Is Nothing Then
             Dim size As New Size(Width * ScaleFactor, Height * ScaleFactor)
             Dim render As PostScriptBuilder = m_ps.Resize(size)
+            Dim img As ImageData = DirectCast(render.MakePaint(Drivers.GDI), ImageData)
 
             dataX = d3js.scale.linear.domain(values:=New Double() {0, Width}).range(x)
             dataY = d3js.scale.linear(reverse:=True).domain(values:=New Double() {0, Height}).range(y)
@@ -106,7 +107,7 @@ Public Class PlotView
             scaleX = d3js.scale.linear.domain(values:=New Double() {0, Width}).range(values:=New Double() {0, size.Width})
             scaleY = d3js.scale.linear.domain(values:=New Double() {0, Height}).range(values:=New Double() {0, size.Height})
 
-            PictureBox1.BackgroundImage = DirectCast(render.MakePaint(Drivers.GDI), ImageData).GetGdiPlusRasterImageResource
+            PictureBox1.BackgroundImage = img.GetGdiPlusRasterImageResource
         End If
 
         If Debug Then
