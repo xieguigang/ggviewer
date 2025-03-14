@@ -44,7 +44,7 @@ Public Class PlotView
     Private Sub RenderPsElements()
         Dim size As New Size(Width * ScaleFactor, Height * ScaleFactor)
         Dim bg = ggplot.ggplotTheme.background.TranslateColor
-        Dim g As GraphicsPS = DriverLoad.CreateGraphicsDevice(size, bg, driver:=Drivers.PostScript)
+        Dim g As GraphicsPostScript = DriverLoad.CreateGraphicsDevice(size, bg, driver:=Drivers.PostScript)
         Dim region As New GraphicsRegion With {
             .Padding = Me.PlotPadding,
             .Size = size
