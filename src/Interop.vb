@@ -23,4 +23,19 @@ Module Interop
             Return System.Drawing.Image.FromStream(ms)
         End Using
     End Function
+
+    <Extension>
+    Public Function GetGdiPlusRasterImageResource(canvas As ImageData) As System.Drawing.Image
+#If NET48 Then
+        Return canvas.Image
+#Else
+        Using ms As New MemoryStream
+            Call canvas.Image.Save(ms, ImageFormats.Png)
+            Call ms.Flush()
+            Call ms.Seek(Scan0, SeekOrigin.Begin)
+
+            Return System.Drawing.Image.FromStream(ms)
+        End Using
+#End If
+    End Function
 End Module
