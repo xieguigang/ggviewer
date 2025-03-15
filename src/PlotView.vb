@@ -13,7 +13,7 @@ Public Class PlotView
     Dim m_ggplot As ggplot.ggplot
     Dim m_counter As New PerformanceCounter
     Dim m_ps As PostScriptBuilder
-    Dim m_xy As SpatialLookup
+    Dim m_xy As SpatialHashing
 
     Dim x As DoubleRange
     Dim y As DoubleRange
@@ -85,7 +85,6 @@ Public Class PlotView
         End If
 
         m_ps = g.GetContextInfo
-        m_xy = New SpatialLookup(ps:=g.GetContextInfo)
     End Sub
 
     Private Sub Rendering()
@@ -109,7 +108,8 @@ Public Class PlotView
             scaleY = d3js.scale.linear.domain(values:=New Double() {0, Height}).range(values:=New Double() {0, size.Height})
 
             ' update index for plot element spatial rendering
-            m_xy = New SpatialLookup(ps:=render)
+            m_xy = New SpatialHashing(size.Width, size.Height)
+            m_xy.AddPlot(render)
 
             PictureBox1.BackgroundImage = img.GetGdiPlusRasterImageResource
         End If
@@ -140,7 +140,7 @@ Public Class PlotView
         Dim offset = PointToClient(Cursor.Position)
         Dim dataXy As New PointF(dataX(offset.X), dataY(offset.Y))
         Dim objectXy As New PointF(scaleX(offset.X), scaleY(offset.Y))
-        Dim obj As PSElement = m_xy.FindNearby(objectXy.X, objectXy.Y)
+        Dim obj As PSElement = m_xy.FindShapeByPoint(objectXy.X, objectXy.Y)
 
         If obj Is Nothing Then
             Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}]")
