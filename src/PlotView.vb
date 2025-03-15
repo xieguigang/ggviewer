@@ -30,6 +30,7 @@ Public Class PlotView
         Set
             m_ggplot = Value
             m_ggplot.driver = Drivers.PostScript
+            m_ggplot.commentText = True
 
             If Not m_ggplot Is Nothing Then
                 Call RenderPsElements()
