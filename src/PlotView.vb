@@ -145,7 +145,7 @@ Public Class PlotView
         If obj Is Nothing Then
             Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}]")
         Else
-            Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}] {obj.ToString}")
+            Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}] {obj.comment}")
         End If
     End Sub
 
