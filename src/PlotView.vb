@@ -140,7 +140,7 @@ Public Class PlotView
         Dim offset = PointToClient(Cursor.Position)
         Dim dataXy As New PointF(dataX(offset.X), dataY(offset.Y))
         Dim objectXy As New PointF(scaleX(offset.X), scaleY(offset.Y))
-        Dim obj As PSElement = m_xy.FindShapeByPoint(objectXy.X, objectXy.Y)
+        Dim obj As PSElement = m_xy.FindCommentShapeByPoint(objectXy.X, objectXy.Y)
 
         If obj Is Nothing Then
             Call ToolTip1.SetToolTip(PictureBox1, $"[{dataXy.X.ToString("F1")},{dataXy.Y.ToString("F1")}]")
