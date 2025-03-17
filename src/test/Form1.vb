@@ -63,7 +63,7 @@ Public Class Form1
             colorSet:="jet",
             padding:="padding: 5% 10% 10% 10%;")
 
-        plot += geom_point(size:=12)
+        plot += geom_point(size:=5)
 
         view.ScaleFactor = 1.25
         view.PlotPadding = plot.ggplotTheme.padding
