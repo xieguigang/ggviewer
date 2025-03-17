@@ -29,9 +29,10 @@ Public Class Form1
         Controls.Add(view)
         view.Dock = DockStyle.Fill
 
+        Call largeScatter()
         ' Call histTest()
         ' Call gaussTest()
-        Call pcaTest()
+        ' Call pcaTest()
     End Sub
 
     Private Sub view_SizeChanged(sender As Object, e As EventArgs) Handles view.SizeChanged
@@ -48,6 +49,21 @@ Public Class Form1
         Dim plot As ggplot.ggplot = ggplotFunction.ggplot(data:=raw, mapping:=aes(x:="value", fill:="series")) +
             geom_histogram(position:=LayoutPosition.identity, alpha:=0.5, binwidth:=0.1) +
             labs(title:="Multiple Series Distribution", x:="Value", y:="Frequency")
+
+        view.ScaleFactor = 1.25
+        view.PlotPadding = plot.ggplotTheme.padding
+        view.ggplot = plot
+    End Sub
+
+    Private Sub largeScatter()
+        Dim scatters = DataFrame.read_csv("E:\ggviewer\data\feature_regions_dbscan.csv")
+        Dim plot As ggplot.ggplot = ggplotFunction.ggplot(
+            data:=scatters,
+            mapping:=aes("x", "y", color:="Cluster"),
+            colorSet:="jet",
+            padding:="padding: 5% 10% 10% 10%;")
+
+        plot += geom_point(size:=12)
 
         view.ScaleFactor = 1.25
         view.PlotPadding = plot.ggplotTheme.padding
