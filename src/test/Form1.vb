@@ -29,9 +29,9 @@ Public Class Form1
         Controls.Add(view)
         view.Dock = DockStyle.Fill
 
-        Call histTest()
+        ' Call histTest()
         ' Call gaussTest()
-        ' Call pcaTest()
+        Call pcaTest()
     End Sub
 
     Private Sub view_SizeChanged(sender As Object, e As EventArgs) Handles view.SizeChanged
@@ -55,7 +55,7 @@ Public Class Form1
     End Sub
 
     Private Sub pcaTest()
-        Dim iris = DataFrame.read_csv("E:\GCModeller\src\R-sharp\REnv\data\bezdekIris.csv")
+        Dim iris = DataFrame.read_csv("E:\ggviewer\data\bezdekIris.csv")
         Dim classes As StringVector = iris.delete("class")
         Dim pca = iris.CommonDataSet().PrincipalComponentAnalysis(maxPC:=2).GetPCAScore
         Dim plot As ggplot.ggplot = ggplotFunction.ggplot(
