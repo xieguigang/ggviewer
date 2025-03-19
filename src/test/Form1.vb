@@ -29,7 +29,8 @@ Public Class Form1
         Controls.Add(view)
         view.Dock = DockStyle.Fill
 
-        Call largeScatter()
+        Call violinTest()
+        ' Call largeScatter()
         ' Call histTest()
         ' Call gaussTest()
         ' Call pcaTest()
@@ -39,6 +40,18 @@ Public Class Form1
         If view.Debug Then
             Me.Text = view.LastRenderCounter.ToString
         End If
+    End Sub
+
+    Private Sub violinTest()
+        Dim a = Vector.norm(100, 5, 2)
+        Dim b = Vector.norm(100, 6, 2)
+        Dim c = Vector.norm(100, 7, 1)
+        Dim data = New DataFrame().add("group", {"A", "B", "C"}.Repeats([each]:=100)).add("value", Linq.Concatenate(a, b, c))
+        Dim plot As ggplot.ggplot = ggplotFunction.ggplot(data, aes(x:="group", y:="value")) + geom_violin()
+
+        view.ScaleFactor = 1.25
+        view.PlotPadding = plot.ggplotTheme.padding
+        view.ggplot = plot
     End Sub
 
     Private Sub histTest()
