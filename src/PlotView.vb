@@ -76,12 +76,12 @@ Public Class PlotView
         If x.mapper = d3js.scale.MapperTypes.Continuous Then
             Me.x = x.ToNumeric
         Else
-            Throw New NotImplementedException()
+            Me.x = x.range
         End If
         If y.mapper = d3js.scale.MapperTypes.Continuous Then
             Me.y = y.ToNumeric
         Else
-            Throw New NotImplementedException()
+            Me.y = y.range
         End If
 
         m_ps = g.GetContextInfo
