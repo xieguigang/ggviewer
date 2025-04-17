@@ -47,7 +47,7 @@ Public Class Form1
         Dim b = Vector.norm(100, 6, 2)
         Dim c = Vector.norm(100, 7, 1)
         Dim data = New DataFrame().add("group", {"A", "B", "C"}.Repeats([each]:=100)).add("value", Linq.Concatenate(a, b, c))
-        Dim plot As ggplot.ggplot = ggplotFunction.ggplot(data, aes(x:="group", y:="value")) + geom_violin()
+        Dim plot As ggplot.ggplot = ggplotFunction.ggplot(data, aes(x:="group", y:="value")) + geom_violin() + geom_jitter(radius:=4, adjust:=adjustColor.darker, width:=0.3)
 
         view.ScaleFactor = 1.25
         view.PlotPadding = plot.ggplotTheme.padding
