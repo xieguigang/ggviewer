@@ -139,6 +139,17 @@ Public Class PlotView
 
     Private Sub PictureBox1_MouseMove(sender As Object, e As MouseEventArgs) Handles PictureBox1.MouseMove
         Dim offset = PointToClient(Cursor.Position)
+
+        If dataX Is Nothing OrElse
+            dataY Is Nothing OrElse
+            scaleX Is Nothing OrElse
+            scaleY Is Nothing OrElse
+            m_xy Is Nothing Then
+
+            ' 20250827 skip of the empty viewer status
+            Return
+        End If
+
         Dim dataXy As New PointF(dataX(offset.X), dataY(offset.Y))
         Dim objectXy As New PointF(scaleX(offset.X), scaleY(offset.Y))
         Dim obj As PSElement = m_xy.FindCommentShapeByPoint(objectXy.X, objectXy.Y)
