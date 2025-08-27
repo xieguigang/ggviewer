@@ -125,14 +125,14 @@ Public Class PlotView
 
     Public Sub Save(filename As String)
         Dim driver As Drivers = g.ParseDriverEnumValue(filename.ExtensionSuffix)
-        Dim plotPadding As PlotPadding = plotPadding.TryParse(ggplot.ggplotTheme.padding)
+        Dim padding As PlotPadding = Padding.TryParse(ggplot.ggplotTheme.padding)
         Dim size As New Size(m_ps.width, m_ps.height)
-        Dim bg = ggplot.ggplotTheme.background
-        Dim padding As Integer() = PaddingLayout.EvaluateFromCSS(New CSSEnvirnment(size), plotPadding)
+        Dim bg As String = ggplot.ggplotTheme.background
+        Dim paddingVec As Integer() = PaddingLayout.EvaluateFromCSS(New CSSEnvirnment(size), padding)
 
         Using gfx As IGraphics = DriverLoad.CreateGraphicsDevice(size, bg, driver:=driver)
             Call m_ps.MakePaint(gfx)
-            Call DriverLoad.GetData(gfx, padding).Save(filename)
+            Call DriverLoad.GetData(gfx, paddingVec).Save(filename)
         End Using
     End Sub
 
