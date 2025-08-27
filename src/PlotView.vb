@@ -29,10 +29,11 @@ Public Class PlotView
         End Get
         Set
             m_ggplot = Value
-            m_ggplot.driver = Drivers.PostScript
-            m_ggplot.commentText = True
 
-            If Not m_ggplot Is Nothing Then
+            If m_ggplot IsNot Nothing Then
+                m_ggplot.driver = Drivers.PostScript
+                m_ggplot.commentText = True
+
                 Call RenderPsElements()
                 Call Rendering()
             End If
