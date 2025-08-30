@@ -125,16 +125,18 @@ Public Class PlotView
     End Sub
 
     Public Sub Save(filename As String)
-        Dim driver As Drivers = g.ParseDriverEnumValue(filename.ExtensionSuffix)
-        Dim padding As PlotPadding = Padding.TryParse(ggplot.ggplotTheme.padding)
-        Dim size As New Size(m_ps.width, m_ps.height)
-        Dim bg As String = ggplot.ggplotTheme.background
-        Dim paddingVec As Integer() = PaddingLayout.EvaluateFromCSS(New CSSEnvirnment(size), padding)
+        If Not ggplot Is Nothing Then
+            Dim driver As Drivers = g.ParseDriverEnumValue(filename.ExtensionSuffix)
+            Dim padding As PlotPadding = Padding.TryParse(ggplot.ggplotTheme.padding)
+            Dim size As New Size(m_ps.width, m_ps.height)
+            Dim bg As String = ggplot.ggplotTheme.background
+            Dim paddingVec As Integer() = PaddingLayout.EvaluateFromCSS(New CSSEnvirnment(size), padding)
 
-        Using gfx As IGraphics = DriverLoad.CreateGraphicsDevice(size, bg, driver:=driver)
-            Call m_ps.MakePaint(gfx)
-            Call DriverLoad.GetData(gfx, paddingVec).Save(filename)
-        End Using
+            Using gfx As IGraphics = DriverLoad.CreateGraphicsDevice(size, bg, driver:=driver)
+                Call m_ps.MakePaint(gfx)
+                Call DriverLoad.GetData(gfx, paddingVec).Save(filename)
+            End Using
+        End If
     End Sub
 
     Private Sub PictureBox1_MouseMove(sender As Object, e As MouseEventArgs) Handles PictureBox1.MouseMove
@@ -162,7 +164,9 @@ Public Class PlotView
     End Sub
 
     Private Sub CopyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyToolStripMenuItem.Click
-        Call Clipboard.SetImage(PictureBox1.BackgroundImage)
+        If Not PictureBox1.BackgroundImage Is Nothing Then
+            Call Clipboard.SetImage(PictureBox1.BackgroundImage)
+        End If
     End Sub
 
     Private Sub SaveImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveImageToolStripMenuItem.Click
