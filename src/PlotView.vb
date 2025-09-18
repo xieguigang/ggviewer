@@ -48,6 +48,7 @@ Public Class PlotView
 
     Public Property PlotPadding As PlotPadding = "padding: 5% 10% 10% 10%;"
     Public Property ScaleFactor As Single = 1.25
+    Public Property Dpi As Integer = 120
 
 #If DEBUG Then
     Public Property Debug As Boolean = True
@@ -62,7 +63,7 @@ Public Class PlotView
     Private Sub RenderPsElements()
         Dim size As New Size(Width * ScaleFactor, Height * ScaleFactor)
         Dim bg = ggplot.ggplotTheme.background.TranslateColor
-        Dim g As GraphicsPostScript = DriverLoad.CreateGraphicsDevice(size, bg, driver:=Drivers.PostScript)
+        Dim g As GraphicsPostScript = DriverLoad.CreateGraphicsDevice(size, bg, dpi:=Dpi, driver:=Drivers.PostScript)
         Dim region As New GraphicsRegion With {
             .Padding = Me.PlotPadding,
             .Size = size
