@@ -59,6 +59,16 @@ Public Class PlotView
         End Set
     End Property
 
+    Public Overrides Property BackgroundImageLayout As ImageLayout
+        Get
+            Return PictureBox1.BackgroundImageLayout
+        End Get
+        Set(value As ImageLayout)
+            PictureBox1.BackgroundImageLayout = value
+        End Set
+    End Property
+
+
     Public Property PlotPadding As PlotPadding = "padding: 5% 10% 10% 10%;"
     Public Property ScaleFactor As Single = 1.25
     Public Property Dpi As Integer = 120
