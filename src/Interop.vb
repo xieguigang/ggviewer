@@ -7,7 +7,7 @@ Imports Microsoft.VisualBasic.Imaging.Driver
 Imports System.Drawing.Imaging
 #End If
 
-Module Interop
+Public Module Interop
 
     <Extension>
     Public Function GetGdiPlusRasterImageResource(canvas As GdiRasterGraphics) As System.Drawing.Image
