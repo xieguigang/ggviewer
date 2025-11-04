@@ -46,6 +46,19 @@ Public Class PlotView
         End Get
     End Property
 
+    ''' <summary>
+    ''' get/set of the display chart image of the ggplot canvas
+    ''' </summary>
+    ''' <returns></returns>
+    Public Overrides Property BackgroundImage As System.Drawing.Image
+        Get
+            Return PictureBox1.BackgroundImage
+        End Get
+        Set(value As System.Drawing.Image)
+            PictureBox1.BackgroundImage = value
+        End Set
+    End Property
+
     Public Property PlotPadding As PlotPadding = "padding: 5% 10% 10% 10%;"
     Public Property ScaleFactor As Single = 1.25
     Public Property Dpi As Integer = 120
