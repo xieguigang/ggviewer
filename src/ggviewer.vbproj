@@ -14,6 +14,7 @@
     <Authors>i@xieguigang.me</Authors>
     <Description>A interactive data visualization canvas for .NET CLR ggplot/R# based on winform framework.</Description>
     <PackageProjectUrl>https://github.com/xieguigang/ggviewer</PackageProjectUrl>
+    <NoWarn>$(NoWarn);WFO1000</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows|AnyCPU'">
