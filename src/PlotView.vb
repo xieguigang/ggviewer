@@ -97,6 +97,7 @@ Public Class PlotView
 
         Dim x As axisMap = ggplot.base.data!x
         Dim y As axisMap = ggplot.base.data!y
+        Dim context As Object = g.GetContextInfo.Context
 
         If x.mapper = d3js.scale.MapperTypes.Continuous Then
             Me.x = x.ToNumeric
@@ -109,7 +110,7 @@ Public Class PlotView
             Me.y = y.range
         End If
 
-        m_ps = g.GetContextInfo
+        m_ps = DirectCast(context, PostScriptBuilder)
     End Sub
 
     Private Sub Rendering()
