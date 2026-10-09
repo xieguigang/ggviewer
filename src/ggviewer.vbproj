@@ -107,14 +107,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Primitives" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\GCModeller\src\R-sharp\R#\Rsharp-netcore5.vbproj" />
     <ProjectReference Include="..\..\GCModeller\src\runtime\ggplot\src\ggplot\ggplot.NET5.vbproj" />
     <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\Data_science\Mathematica\Math\Math\Math.NET5.vbproj" />
-    <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\Data_science\Visualization\Plots\plots-netcore5.vbproj" />
+    <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\Data_science\Visualization\DataPlot\DataPlot.vbproj" />
     <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\gr\Microsoft.VisualBasic.Imaging\imaging.NET5.vbproj" />
     <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\Microsoft.VisualBasic.Core\src\Core.vbproj" />
     <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\mime\text%html\html_netcore5.vbproj" />
